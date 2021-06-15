@@ -1,2 +1,1 @@
-# gotoperu-mexico
-GotoPeru mexico
+# gotoperu-colombia
