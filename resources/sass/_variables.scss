@@ -1,0 +1,51 @@
+// Body
+$body-bg: #f8fafc;
+
+// Typography
+//$font-family-sans-serif: 'Nunito', sans-serif;
+$font-family-sans-serif: "Quicksand", sans-serif;
+$font-size-base: 1rem;
+$line-height-base: 1.6;
+
+// Colors
+$blue: #3490dc;
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #f66d9b;
+$red: #e3342f;
+$orange: #f6993f;
+$yellow: #ffed4a;
+$green: #38c172;
+$teal: #4dc0b5;
+$cyan: #6cb2eb;
+$primary: #007bff;
+$info: #00b4e9;
+
+//font
+$fa-font-path:        "../webfonts";
+
+$carousel-control-color: #333333;
+$g-green:    #7F8429 !default;
+$g-yellow:   #f9a825 !default;
+$g-dark:   #333333 !default;
+$g-dark-light: #969696 !default;
+
+$theme-colors: () !default;
+$theme-colors: map-merge((
+    "g-green": $g-green,
+    "g-yellow": $g-yellow,
+    "g-dark": $g-dark,
+    "g-dark-light": $g-dark-light,
+), $theme-colors);
+
+$headings-line-height:        1.2 !default;
+$display5-size:               2.5rem !default;
+
+$display5-weight:             300 !default;
+$display-line-height:         $headings-line-height !default;
+
+.display-5 {
+    font-size: $display5-size;
+    font-weight: $display5-weight;
+    line-height: $display-line-height;
+}

@@ -1,0 +1,65 @@
+#<IfModule mod_rewrite.c>
+#    <IfModule mod_negotiation.c>
+#        Options -MultiViews -Indexes
+#    </IfModule>
+#
+#    RewriteEngine On
+#
+#    # Handle Authorization Header
+#    RewriteCond %{HTTP:Authorization} .
+#    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+#
+#    # Redirect Trailing Slashes If Not A Folder...
+#    RewriteCond %{REQUEST_FILENAME} !-d
+#    RewriteCond %{REQUEST_URI} (.+)/$
+#    RewriteRule ^ %1 [L,R=301]
+#
+#    # Handle Front Controller...
+#    RewriteCond %{REQUEST_FILENAME} !-d
+#    RewriteCond %{REQUEST_FILENAME} !-f
+#    RewriteRule ^ index.php [L]
+#</IfModule>
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+    RewriteCond %{HTTPS} off [OR]
+    RewriteCond %{HTTP_HOST} !^www\. [NC]
+    RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
+    RewriteRule ^ https://www.%1%{REQUEST_URI} [L,NE,R=301]
+
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+<IfModule mod_expires.c>
+    <filesmatch "\.(jpg|JPG|gif|GIF|png|PNG|css|js|woff2|ico|mp4|m4v|webm)$">
+        ExpiresActive on
+        ExpiresDefault "access plus 30 day"
+    </filesmatch>
+</IfModule>
+
+# compress text, html, javascript, css, xml:
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE application/xml
+AddOutputFilterByType DEFLATE application/xhtml+xml
+AddOutputFilterByType DEFLATE application/rss+xml
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
