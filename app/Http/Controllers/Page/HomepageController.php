@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Page;
 
 use App\TCategoria;
 use App\TDestino;
+use App\THotel;
+use App\THotelDestino;
 use App\TInquire;
+use App\TItinerarioImagen;
 use App\TPaquete;
 use App\TPaqueteCategoria;
 use App\TPaqueteDestino;
 use App\TPaqueteDificultad;
+use App\TPasajero;
 use App\TTeam;
 use App\TTour;
 use Illuminate\Http\Request;
@@ -607,11 +611,11 @@ class HomepageController extends Controller
         $hoteles = THotel::all();
         $hoteles_destinos = THotelDestino::all();
 
-        $vuelo = TVuelo::all();
-        $paquete_vuelo = TPaqueteVuelo::with('vuelos')->get();
+//        $vuelo = TVuelo::all();
+//        $paquete_vuelo = TPaqueteVuelo::with('vuelos')->get();
 
         $dificultad = TPaqueteDificultad::all();
-        $comentario = TComentario::with('itinerario')->get();
+//        $comentario = TComentario::with('itinerario')->get();
 
         $imagen = TItinerarioImagen::with('itinerario')->get();
 
