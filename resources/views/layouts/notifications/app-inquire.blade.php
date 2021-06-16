@@ -27,7 +27,7 @@
                     <p>
                         LAS MEJORES VACACIONES EN PERÚ CON EL MEJOR OPERADOR PERUANO
                     </p>
-                    <p><a href="http://gotoperu.com.mx/" style="color:blue" target="_blank">GotoPeru</a></p>
+                    <p><a href="http://gotoperu.co/" style="color:blue" target="_blank">GotoPeru</a></p>
                 </td>
                 <td>
                     <img class="CToWUd" width="250" alt="logo gotoperu" src="{{asset('images/logo-gotoperu-ave.png')}}" style="vertical-align:top;max-width:220px">
