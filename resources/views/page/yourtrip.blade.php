@@ -76,7 +76,7 @@
                                 <p class="h5 font-weight-normal"><b>Departure:</b> {{$fecha_inquire}}</p>
                                 <p class="h5 font-weight-normal"><b>Destinations:</b></p>
                                 @foreach($paquete_destinos->where('idpaquetes',$paquetes->id) as $paquete_destino)
-                                    <a href="{{route('destinations_country_show_path', ['peru-travel', str_replace(' ', '-', strtolower($paquete_destino->destinos->nombre))])}}-tours"><img src="{{asset('images/destinations/destinations/'.str_replace(' ','-', strtolower($paquete_destino->destinos->nombre)).'')}}.jpg" alt="" width="50" height="50" class="rounded-circle" data-toggle="tooltip" data-placement="top" title="{{ucwords(strtolower($paquete_destino->destinos->nombre))}}">
+{{--                                    <a href="{{route('destination_show_path', ['peru-travel', str_replace(' ', '-', strtolower($paquete_destino->destinos->nombre))])}}-tours"><img src="{{asset('images/destinations/destinations/'.str_replace(' ','-', strtolower($paquete_destino->destinos->nombre)).'')}}.jpg" alt="" width="50" height="50" class="rounded-circle" data-toggle="tooltip" data-placement="top" title="{{ucwords(strtolower($paquete_destino->destinos->nombre))}}">--}}
                                     </a>
                                 @endforeach
                             </div>
