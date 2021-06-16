@@ -139,3 +139,9 @@ Route::get('/blog/categoria/{cat}', [
     'uses' => 'Page\HomepageController@blog_categoria',
     'as' => 'blog_categoria',
 ]);
+
+//yourtrip
+Route::get('/yourtrip/itinerary/{id}', [
+    'uses' => 'Page\HomepageController@yourtrip',
+    'as' => 'yourtrip_us_path',
+]);

@@ -591,4 +591,30 @@ class HomepageController extends Controller
         return $post;
     }
 
+    public function yourtrip($id)
+    {
+//        dd(Crypt::encrypt($id));
+
+        $id = Crypt::decrypt($id);
+
+
+        $inquire = TPasajero::find($id);
+
+        $paquete = TPaquete::with('paquetes_destinos', 'precio_paquetes', 'imagen_paquetes', 'paquete_incluye', 'paquete_no_incluye')->where('estado', 0)->get();
+        $paquete_destinos = TPaqueteDestino::with('destinos')->get();
+        $paquete_iti = TPaquete::with('paquete_itinerario','paquetes_destinos', 'precio_paquetes', 'paquetes_categoria')->where('id', $inquire->id_paquete)->get();
+
+        $hoteles = THotel::all();
+        $hoteles_destinos = THotelDestino::all();
+
+        $vuelo = TVuelo::all();
+        $paquete_vuelo = TPaqueteVuelo::with('vuelos')->get();
+
+        $dificultad = TPaqueteDificultad::all();
+        $comentario = TComentario::with('itinerario')->get();
+
+        $imagen = TItinerarioImagen::with('itinerario')->get();
+
+        return view('page.yourtrip', compact('paquete_destinos','paquete_iti','hoteles','hoteles_destinos','dificultad','imagen','inquire'));
+    }
 }
