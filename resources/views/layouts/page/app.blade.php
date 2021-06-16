@@ -121,11 +121,11 @@
                         <p class="m-0 text-g-yellow"><i data-feather="chevron-right" class="text-white" stroke-width="1"></i> Ciudad del Cusco</p>
                     </div>
                     <div class="col">
-                        <h6 class="text-white font-weight-bold">MÉXICO</h6>
+                        <h6 class="text-white font-weight-bold">Colombia</h6>
                         <div class="line-subtitle"></div>
-                        <p class="m-0 text-g-yellow"><i data-feather="chevron-right" class="text-white" stroke-width="1"></i> Avenida Rio Churubusco 601</p>
-                        <p class="m-0 text-g-yellow"><i data-feather="chevron-right" class="text-white" stroke-width="1"></i> Xoco</p>
-                        <p class="m-0 text-g-yellow"><i data-feather="chevron-right" class="text-white" stroke-width="1"></i> Coyoacán, Ciudad de México 03330</p>
+                        <p class="m-0 text-g-yellow"><i data-feather="chevron-right" class="text-white" stroke-width="1"></i> Calle 26 # 92-32</p>
+                        <p class="m-0 text-g-yellow"><i data-feather="chevron-right" class="text-white" stroke-width="1"></i> Bogotá</p>
+                        <p class="m-0 text-g-yellow"><i data-feather="chevron-right" class="text-white" stroke-width="1"></i> 110911</p>
                     </div>
                     <div class="col">
                         <h6 class="text-white font-weight-bold">Compartir en:</h6>
@@ -259,7 +259,7 @@
     <!-- end olark code -->
 
 
-    
+
 
 
     <!-- Start of HubSpot Embed Code -->
