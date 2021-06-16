@@ -601,7 +601,7 @@ class HomepageController extends Controller
 //        dd(Crypt::encrypt($id));
 
         $id = Crypt::decrypt($id);
-        
+
         $inquire = TPasajero::find($id);
 
         $paquete = TPaquete::with('paquetes_destinos', 'precio_paquetes', 'imagen_paquetes', 'paquete_incluye', 'paquete_no_incluye')->where('estado', 0)->get();
