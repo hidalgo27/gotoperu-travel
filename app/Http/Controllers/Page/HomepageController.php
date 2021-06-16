@@ -17,6 +17,7 @@ use App\TTeam;
 use App\TTour;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 //use Illuminate\Support\Facades\Http;
@@ -599,9 +600,8 @@ class HomepageController extends Controller
     {
 //        dd(Crypt::encrypt($id));
 
-//        $id = Crypt::decrypt($id);
-
-
+        $id = Crypt::decrypt($id);
+        
         $inquire = TPasajero::find($id);
 
         $paquete = TPaquete::with('paquetes_destinos', 'precio_paquetes', 'imagen_paquetes', 'paquete_incluye', 'paquete_no_incluye')->where('estado', 0)->get();
