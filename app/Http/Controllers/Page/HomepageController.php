@@ -595,7 +595,7 @@ class HomepageController extends Controller
     {
 //        dd(Crypt::encrypt($id));
 
-        $id = Crypt::decrypt($id);
+//        $id = Crypt::decrypt($id);
 
 
         $inquire = TPasajero::find($id);
