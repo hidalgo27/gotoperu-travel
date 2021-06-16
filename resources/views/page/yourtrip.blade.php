@@ -1,4 +1,4 @@
-@extends('layouts.page.default')
+@extends('layouts.page.app')
 @section('content')
 
     @foreach($paquete_iti as $paquetes)
