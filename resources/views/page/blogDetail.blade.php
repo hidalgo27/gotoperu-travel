@@ -93,7 +93,7 @@
                             <div class="carousel-inner">
                                 @foreach ($post->imagenes as $item)
                                     <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                        <img src="https://blog.gotoperu.com.mx/storage/post/{{$item['nombre']}}" class="d-block w-100" alt="{{$post[0]['titulo']}}" loading="lazy">
+                                        <img src="{{$item['nombre']}}" class="d-block w-100" alt="{{$post[0]['titulo']}}" loading="lazy">
                                     </div>
                                 @endforeach
                             </div>
@@ -141,7 +141,7 @@
                             <div class="row no-gutters mb-4">
                                 <div  class="col-auto">
                                     <a href="/blog/{{$post->url}}">
-                                        <img src="https://blog.gotoperu.com.mx/storage/post/{{$post->imagen_miniatura}}" alt="{{$post->titulo}}" class="img-fluid float-left miniatura" loading="lazy">
+                                        <img src="{{$post->imagen_miniatura}}" alt="{{$post->titulo}}" class="img-fluid float-left miniatura" loading="lazy">
                                     </a>
                                 </div>
                                 <div class="col pl-2">
@@ -182,7 +182,7 @@
                                 <div class="row no-gutters mb-4">
                                     <div  class="col-auto">
                                         <a href="/blog/{{$post->url}}">
-                                            <img src="https://blog.gotoperu.com.mx/storage/post/{{$post->imagen_miniatura}}" alt="{{$post->titulo}}" class="img-fluid float-left miniatura" loading="lazy">
+                                            <img src="{{$post->imagen_miniatura}}" alt="{{$post->titulo}}" class="img-fluid float-left miniatura" loading="lazy">
                                         </a>
                                     </div>
                                     <div class="col pl-2">

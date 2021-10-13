@@ -89,7 +89,7 @@
                                     <div class="carousel-inner" role="listbox">
                                         @foreach ($post['imagenes'] as $photo)
                                             <div class="carousel-item blog {{ $loop->first ? 'active' : '' }}">
-                                                <img class="text-center align-self-center w-100" src="https://blog.gotoperu.com.mx/storage/post/{{$photo['nombre']}}" alt="{{$post['titulo']}}" loading="lazy">
+                                                <img class="text-center align-self-center w-100" src="{{$photo['nombre']}}" alt="{{$post['titulo']}}" loading="lazy">
                                                 <div class="tag bg-rgba-dark-3 text-center text-white">
                                                     <p class="m-2 font-weight-bold">{{$post['categoria']['nombre']}}</p>
                                                 </div>
@@ -183,7 +183,7 @@
                                 <div class="row no-gutters mb-4">
                                     <div  class="col-auto">
                                         <a href="/blog/{{$post['url']}}">
-                                            <img src="https://blog.gotoperu.com.mx/storage/post/{{$post['imagen_miniatura']}}" alt="{{$post['titulo']}}" class="img-fluid float-left miniatura" loading="lazy">
+                                            <img src="{{$post['imagen_miniatura']}}" alt="{{$post['titulo']}}" class="img-fluid float-left miniatura" loading="lazy">
                                         </a>
                                     </div>
                                     <div class="col pl-2">

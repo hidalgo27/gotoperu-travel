@@ -481,7 +481,7 @@
                                     <div class="carousel-inner" role="listbox">
                                         @foreach ($post['imagenes'] as $photo)
                                             <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                                <img class="d-block img-fluid" src="https://blog.gotoperu.com.mx/storage/post/{{$photo['nombre']}}" alt="{{$post['titulo']}}" loading="lazy">
+                                                <img class="d-block img-fluid" src="{{$photo['nombre']}}" alt="{{$post['titulo']}}" loading="lazy">
                                                 <div class="tag bg-rgba-dark-3 text-center text-white">
                                                     <p class="m-2 font-weight-bold">{{$post['categoria']['nombre']}}</p>
                                                 </div>
