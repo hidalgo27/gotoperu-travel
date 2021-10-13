@@ -15,6 +15,9 @@ use App\TPaqueteDificultad;
 use App\TPasajero;
 use App\TTeam;
 use App\TTour;
+use App\TBlog_post;
+use App\TBlog_categoria;
+use App\TSeo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
@@ -28,7 +31,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 class HomepageController extends Controller
 {
-    protected $urlGeneral="https://blog.gotoperu.com.mx";
+    
     public function index(){
         $paquete = TPaquete::with('paquetes_destinos.destinos','paquetes_categoria.categoria', 'precio_paquetes')->get();
         $tours = TTour::with('tours_destinos.destinos')->get();
@@ -36,10 +39,10 @@ class HomepageController extends Controller
         $categoria = TCategoria::all();
         $destino = TDestino::where('estado', 1)->get();
 
-        //$res=Http::get('http://jsonplaceholder.typicode.com/posts');
-        //$posts=$res->json();
-        $client = new Client;
-        $posts=$this->consulta_posts_recientes($client);
+        $posts=TBlog_post::latest()
+        ->take(3)
+        ->with(['user','categoria','imagenes'])
+        ->get();
 
         return view('page.home',
             compact(
@@ -523,78 +526,67 @@ class HomepageController extends Controller
     }
     //blog
     public function blog(){
-        $client = new Client;
-        $posts=$this->consulta_posts($client);
-        $categorias=$this->consulta_categoria($client);
-        $recentPosts=$this->consulta_posts_recientes($client);
-        //
-        $collection=collect($posts);
-        $data = $this->paginate($collection)->setPath(request()->url());
-        return view('page.blog',compact('posts','categorias','recentPosts','data'));
-    }
-    public function paginate($items, $perPage = 5, $page =null, $options = [])
-    {
-        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
-        $items = $items instanceof Collection ? $items : Collection::make($items);
-        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+        $posts=TBlog_post::with(['user','categoria','imagenes'])->paginate(5);
+        $categorias_aux = TBlog_categoria::get(); 
+        $categorias = collect();
+        foreach ($categorias_aux as $cat) { 
+            $idCat = $cat->id; 
+            $consulta = TBlog_post::where('categoria_id',$idCat)->count();
+            $categorias->push([$cat->nombre,$consulta]);
+        }
+        $recentPosts=TBlog_post::latest()->take(3)
+            ->with(['user','categoria','imagenes'])
+            ->get();
+        return view('page.blog',compact('posts','categorias','recentPosts'));
     }
     public function blog_categoria($categoria){
-        $client = new Client;
-        $posts = $this->consulta_posts_por_categoria($categoria,$client);
-        $categorias=$this->consulta_categoria($client);
-        $recentPosts=$this->consulta_posts_recientes($client);
+        $categoria_aux=TBlog_categoria::where('nombre',$categoria)->first();
+        $posts = TBlog_post::with(['user', 'imagenes', 'categoria'])
+            ->where('categoria_id',$categoria_aux->id)->paginate(5);
+        
+        $categorias_aux = TBlog_categoria::get(); 
+        $categorias = collect();
+        foreach ($categorias_aux as $cat) { 
+            $idCat = $cat->id; 
+            $consulta = TBlog_post::where('categoria_id',$idCat)->count();
+            $categorias->push([$cat->nombre,$consulta]);
+        }
+        $recentPosts=TBlog_post::latest()->take(3)
+        ->with(['user','categoria','imagenes'])
+        ->get();
         //
-        $a=collect($posts);
-        $data = $this->paginate($a);
-        return view('page.blog',compact('posts','categorias','recentPosts','data'));
+        return view('page.blog',compact('posts','categorias','recentPosts'));
     }
     public function blog_detail($url){
-        $client = new Client;
-        $post = $this->consulta_post($url,$client);
-        $categorias=$this->consulta_categoria($client);
-        $recentPosts=$this->consulta_posts_recientes($client);
-        $postsRelacionados = $this->consulta_posts_relacionados($url,$client);
-        return view('page.blogDetail', compact('post','categorias','recentPosts','postsRelacionados'));
+        $post = TBlog_post::where('url',$url)
+            ->with(['user','categoria','imagenes'])
+            ->first();
+
+        $seo=TSeo::where('estado',0)->where('id_t',$post->id)->first();
+
+        $categorias_aux = TBlog_categoria::get(); 
+        $categorias = collect();
+        foreach ($categorias_aux as $cat) { 
+            $idCat = $cat->id; 
+            $consulta = TBlog_post::where('categoria_id',$idCat)->count();
+            $categorias->push([$cat->nombre,$consulta]);
+        }
+        $recentPosts=TBlog_post::latest()->take(3)
+            ->with(['user','categoria','imagenes'])
+            ->get();
+
+        $categoria=TBlog_post::select('categoria_id')
+            ->where('url',$url)
+            ->get();
+        $postsRelacionados=TBlog_post::where('categoria_id',$categoria[0]->categoria_id)
+            ->latest()
+            ->take(3)
+            ->with(['user','categoria','imagenes'])
+            ->get();
+        
+        return view('page.blogDetail', compact('post','categorias','recentPosts','postsRelacionados','seo'));
     }
-    public function buscar(Request $request){
-        return 'hello';
-    }
-    public function consulta_categoria($client){
-        $request2 = $client->get($this->urlGeneral.'/api/v1/categorias-post');
-        $response2 = $request2->getBody();
-        $categorias = json_decode($response2, true);
-        return $categorias;
-    }
-    public function consulta_posts_recientes($client){
-        $request3 = $client->get($this->urlGeneral.'/api/v1/lastPost');
-        $response3 = $request3->getBody();
-        $recentPosts = json_decode($response3, true);
-        return $recentPosts;
-    }
-    public function consulta_posts_relacionados($url,$client){
-        $request4 = $client->get($this->urlGeneral.'/api/v1/post-relacionados/'.$url);
-        $response4 = $request4->getBody();
-        $postsRelacionados = json_decode($response4, true);
-        return $postsRelacionados;
-    }
-    public function consulta_posts($client){
-        $request = $client->get($this->urlGeneral.'/api/v1/posts/');
-        $response = $request->getBody();
-        $posts = json_decode($response, true);
-        return $posts;
-    }
-    public function consulta_posts_por_categoria($categoria,$client){
-        $request = $client->get($this->urlGeneral.'/api/v1/posts/'.$categoria);
-        $response = $request->getBody();
-        $posts = json_decode($response, true);
-        return $posts;
-    }
-    public function consulta_post($url,$client){
-        $request = $client->get($this->urlGeneral.'/api/v1/post/'.$url);
-        $response = $request->getBody();
-        $post = json_decode($response, true);
-        return $post;
-    }
+    
 
     public function yourtrip($id)
     {

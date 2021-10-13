@@ -1,4 +1,8 @@
 @extends('layouts.page.app')
+@section('seo')
+    <title>Viajes a Perú 2021 y Tours Todo Incluido a Machu Picchu</title>
+	<meta name="description" content="Encuentra Tu Paquete Turístico Todo Incluido y Reserva Tu Próximo Viaje en Perú 2021/2022 Desde México ¡ Reservas Online GoTo Perú !"/>
+@endsection
 @section('content')
 <header class="header-detail">
     <div class="overlay"></div>
@@ -72,7 +76,7 @@
 {{--                    <p class="font-weight-bold lead text-muted">Descubre todas las noticias, recomendaciones, lugares turísticos e información útil que necesitas saber viajar.</p>--}}
 {{--                </div>--}}
                 <hr class="mb-4">
-                @foreach ($data as $post)
+                @foreach ($posts as $post)
                     <div class="row py-4">
                         <div class="col-12 pb-2">
                             <h3 class="font-weight-bold">
@@ -132,7 +136,7 @@
                 @endforeach
                 <div class="d-flex px-3 pt-4">
                     <div class="mx-auto">
-                        {{ $data->links() }}
+                        {{ $posts->links() }}
                     </div>
                 </div>
             </div>

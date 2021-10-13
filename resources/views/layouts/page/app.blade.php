@@ -6,9 +6,8 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>Viajes a Perú 2021 y Tours Todo Incluido a Machu Picchu</title>
-	<meta name="description" content="Encuentra Tu Paquete Turístico Todo Incluido y Reserva Tu Próximo Viaje en Perú 2021/2022 Desde México ¡ Reservas Online GoTo Perú !"/>
+    @yield('seo')
+    
     <link href="{{asset('icons/favicon.ico')}}" rel="icon" type="image/x-icon">
     <!-- Styles -->
     <link href="{{ asset('css/block.css') }}" rel="stylesheet">

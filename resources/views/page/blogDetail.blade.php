@@ -1,4 +1,21 @@
 @extends('layouts.page.app')
+@section('seo')
+    @if ($seo!=null)
+        @if($seo->titulo !=null)
+            <title>{{$seo->titulo}}</title>
+        @else
+            <title>{{$post->titulo}}</title>
+        @endif
+        @if($seo->descripcion !=null)
+            <meta name="description" content="{{$seo->descripcion}}"/>
+        @else
+            <meta name="description" content="Encuentra Tu Paquete Turístico Todo Incluido y Reserva Tu Próximo Viaje en Perú 2021/2022 Desde México ¡ Reservas Online GoTo Perú !"/>
+        @endif
+    @else
+        <title>{{$post->titulo}}</title>
+        <meta name="description" content="Encuentra Tu Paquete Turístico Todo Incluido y Reserva Tu Próximo Viaje en Perú 2021/2022 Desde México ¡ Reservas Online GoTo Perú !"/>
+    @endif
+@endsection
 @section('content')
 <header class="header-detail">
     <div class="overlay"></div>
@@ -51,7 +68,7 @@
                     <li class="breadcrumb-item"><a href="{{route('blog_path')}}">Blog</a></li>
 
 
-                    <li class="breadcrumb-item active">{{$post[0]['titulo']}}</li>
+                    <li class="breadcrumb-item active">{{$post->titulo}}</li>
 
                 </ol>
 
@@ -69,12 +86,12 @@
 
                         <div id="carouselExampleCaptions" class="carousel slide slider shadow rounded" data-ride="carousel">
                             <ol class="carousel-indicators">
-                                @foreach ($post[0]['imagenes'] as $item)
+                                @foreach ($post->imagenes as $item)
                                     <li data-target="#carouselExampleCaptions" data-slide-to="{{ $loop->index }}" class="{{ $loop->first ? 'active' : '' }}"></li>
                                 @endforeach
                             </ol>
                             <div class="carousel-inner">
-                                @foreach ($post[0]['imagenes'] as $item)
+                                @foreach ($post->imagenes as $item)
                                     <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                                         <img src="https://blog.gotoperu.com.mx/storage/post/{{$item['nombre']}}" class="d-block w-100" alt="{{$post[0]['titulo']}}" loading="lazy">
                                     </div>
@@ -91,14 +108,14 @@
                         </div>
                     </div>
                 </div>
-                <h1 class="h3 font-weight-bold pt-3">{{$post[0]['titulo']}}</h1>
+                <h1 class="h3 font-weight-bold pt-3">{{$post->titulo}}</h1>
                 <span><i class="fa fa-user pr-2 text-g-dark-light small"></i><small class="text-g-dark-light">Autor {{$post[0]['user']['name']}}</small></span>
                 <span class="mx-4"><i class="fa fa-calendar pr-2 text-g-dark-light small"></i><small class="text-g-dark-light">Fecha {{date('d/m/Y', strtotime($post[0]['updated_at']))}}</small></span>
                 <span><i class="fa fa-tags pr-2 text-g-dark-light small"></i><small class="text-g-dark-light">Categoría {{$post[0]['categoria']['nombre']}}</small></span>
                 <hr class="mt-4">
                 <div class="row py-2">
                     <div class="col text-justify">
-                        {!!$post[0]['detalle']!!}
+                        {!!$post->detalle!!}
                     </div>
                 </div>
             </div>
@@ -123,15 +140,15 @@
                         @foreach ($postsRelacionados as $post)
                             <div class="row no-gutters mb-4">
                                 <div  class="col-auto">
-                                    <a href="/blog/{{$post['url']}}">
-                                        <img src="https://blog.gotoperu.com.mx/storage/post/{{$post['imagen_miniatura']}}" alt="{{$post['titulo']}}" class="img-fluid float-left miniatura" loading="lazy">
+                                    <a href="/blog/{{$post->url}}">
+                                        <img src="https://blog.gotoperu.com.mx/storage/post/{{$post->imagen_miniatura}}" alt="{{$post->titulo}}" class="img-fluid float-left miniatura" loading="lazy">
                                     </a>
                                 </div>
                                 <div class="col pl-2">
-                                    <a href="/blog/{{$post['url']}}">
-                                        <h6 class="mb-1 small text-g-dark-light font-weight-bold">{{$post['titulo']}}</h6>
+                                    <a href="/blog/{{$post->url}}">
+                                        <h6 class="mb-1 small text-g-dark-light font-weight-bold">{{$post->titulo}}</h6>
                                     </a>
-                                    <small class="text-primary"><i class="fa fa-calendar pr-2"></i>{{date('d/m/Y', strtotime($post['updated_at']))}}</small>
+                                    <small class="text-primary"><i class="fa fa-calendar pr-2"></i>{{date('d/m/Y', strtotime($post->updated_at))}}</small>
                                 </div>
                             </div>
 
@@ -164,15 +181,15 @@
                             @foreach ($recentPosts as $post)
                                 <div class="row no-gutters mb-4">
                                     <div  class="col-auto">
-                                        <a href="/blog/{{$post['url']}}">
-                                            <img src="https://blog.gotoperu.com.mx/storage/post/{{$post['imagen_miniatura']}}" alt="{{$post['titulo']}}" class="img-fluid float-left miniatura" loading="lazy">
+                                        <a href="/blog/{{$post->url}}">
+                                            <img src="https://blog.gotoperu.com.mx/storage/post/{{$post->imagen_miniatura}}" alt="{{$post->titulo}}" class="img-fluid float-left miniatura" loading="lazy">
                                         </a>
                                     </div>
                                     <div class="col pl-2">
-                                        <a href="/blog/{{$post['url']}}">
-                                            <h6 class="mb-1 small text-g-dark-light font-weight-bold">{{$post['titulo']}}</h6>
+                                        <a href="/blog/{{$post->url}}">
+                                            <h6 class="mb-1 small text-g-dark-light font-weight-bold">{{$post->titulo}}</h6>
                                         </a>
-                                        <small class="text-primary"><i class="fa fa-calendar pr-2"></i>{{date('d/m/Y', strtotime($post['updated_at']))}}</small>
+                                        <small class="text-primary"><i class="fa fa-calendar pr-2"></i>{{date('d/m/Y', strtotime($post->updated_at))}}</small>
                                     </div>
                                 </div>
 
