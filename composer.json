@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "alexpechkarev/google-maps": "6.0",
+        "artesaos/seotools": "^0.20.2",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^7.3",
         "laravel/framework": "^6.0",

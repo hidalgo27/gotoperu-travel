@@ -1,21 +1,4 @@
 @extends('layouts.page.app')
-@section('seo')
-    @if ($seo!=null)
-        @if($seo->titulo !=null)
-            <title>{{$seo->titulo}}</title>
-        @else
-            <title>{{$post->titulo}}</title>
-        @endif
-        @if($seo->descripcion !=null)
-            <meta name="description" content="{{$seo->descripcion}}"/>
-        @else
-            <meta name="description" content="Encuentra Tu Paquete Turístico Todo Incluido y Reserva Tu Próximo Viaje en Perú 2021/2022 Desde México ¡ Reservas Online GoTo Perú !"/>
-        @endif
-    @else
-        <title>{{$post->titulo}}</title>
-        <meta name="description" content="Encuentra Tu Paquete Turístico Todo Incluido y Reserva Tu Próximo Viaje en Perú 2021/2022 Desde México ¡ Reservas Online GoTo Perú !"/>
-    @endif
-@endsection
 @section('content')
 <header class="header-detail">
     <div class="overlay"></div>
