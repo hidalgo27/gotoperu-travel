@@ -35,7 +35,7 @@
                         <template v-for="precio in paquete_p.precio_paquetes">
                             <template v-if="precio.estrellas === 2">
                                 <template v-if="precio.precio_d > 0">
-                                    <p class="font-weight-bold text-primary h5 m-0"><sup class="small"><small>desde</small></sup> ${{precio.precio_d}}<small>USD</small></p>
+                                    <p class="font-weight-bold text-primary h5 m-0"><sup class="small"><small>desde</small></sup> ${{precio.precio_d}}<small>COP</small></p>
                                 </template>
                                 <template v-else>
                                     <span class="text-danger font-weight-bold">Consulte</span>

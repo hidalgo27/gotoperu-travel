@@ -94,7 +94,7 @@
                                             @if($precio->precio_d > 0)
                                                 <small class="text-secondary">Desde</small>
                                                 <b class="h1 text-center font-weight-bold text-danger"><sup>$</sup>{{$precio->precio_d}}</b>
-                                                <small class="small text-secondary">USD</small>
+                                                <small class="small text-secondary">COP</small>
                                             @else
                                                 <span class="text-danger">
                                                     Inquire
@@ -348,7 +348,7 @@
                                     <tr class="text-center">
                                         @foreach($paquetes->precio_paquetes->sortBy('estrellas') as $precio)
                                             @if($precio->precio_d > 0)
-                                                <td>${{$precio->precio_d}}<small>USD</small></td>
+                                                <td>$ {{$precio->precio_d}} <small>COP</small></td>
                                             @else
                                                 <td class="font-weight-bold text-danger">Inquire</td>
                                             @endif
