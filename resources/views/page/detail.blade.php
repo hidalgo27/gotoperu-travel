@@ -338,10 +338,10 @@
                             <table class="table table-borderless border">
                                 <thead class="thead-dark">
                                     <tr class="text-center">
-                                        <th scope="col">Económico</th>
-                                        <th scope="col">Normal</th>
-                                        <th scope="col">Superior</th>
-                                        <th scope="col">Lujo</th>
+                                        <th scope="col">2 Estrellas</th>
+                                        <th scope="col">3 Estrellas</th>
+                                        <th scope="col">4 Estrellas</th>
+                                        <th scope="col">5 Estrellas</th>
                                     </tr>
                                 </thead>
                                 <tbody>
