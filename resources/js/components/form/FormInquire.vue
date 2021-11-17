@@ -280,6 +280,12 @@
                     },
                     {
                         nombre: 'Camino inca', value: '6'
+                    },
+                    {
+                        nombre: 'Laguna Humantay', value: '94'
+                    },
+                    {
+                        nombre: 'Oasis Huacachina', value: '95'
                     }
                 ],
                 travellers_form:[
