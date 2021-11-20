@@ -97,7 +97,7 @@
                                                             @if($precio->estrellas == 2)
                                                                 @if($precio->precio_d > 0)
                                                                     {{--                                                                <p class="text-info font-weight-bold m-0 h5"><small><sup>form $</sup></small>{{$precio->precio_d}}<small>USD</small></p>--}}
-                                                                    <p class="font-weight-bold text-primary h5 m-0"><sup class="small"><small>desde</small></sup> ${{$precio->precio_d}}<small>USD</small></p>
+                                                                    <p class="font-weight-bold text-primary h5 m-0"><sup class="small"><small>desde</small></sup> ${{number_format($precio->precio_d, 0, ',', '.')}}<small>USD</small></p>
                                                                 @else
                                                                     <span class="text-danger">Consulte</span>
                                                                 @endif

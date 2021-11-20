@@ -93,7 +93,7 @@
                                         @foreach($paquetes->precio_paquetes->where('estrellas', 2)->sortBy('estrellas') as $precio)
                                             @if($precio->precio_d > 0)
                                                 <small class="text-secondary">Desde</small>
-                                                <b class="h1 text-center font-weight-bold text-danger"><sup>$</sup>{{$precio->precio_d}}</b>
+                                                <b class="h1 text-center font-weight-bold text-danger"><sup>$</sup>{{number_format($precio->precio_d, 0, ',', '.')}}</b>
                                                 <small class="small text-secondary">COP</small>
                                             @else
                                                 <span class="text-danger">
@@ -348,7 +348,7 @@
                                     <tr class="text-center">
                                         @foreach($paquetes->precio_paquetes->sortBy('estrellas') as $precio)
                                             @if($precio->precio_d > 0)
-                                                <td>$ {{$precio->precio_d}} <small>COP</small></td>
+                                                <td>$ {{number_format($precio->precio_d, 0, ',', '.')}} <small>COP</small></td>
                                             @else
                                                 <td class="font-weight-bold text-danger">Inquire</td>
                                             @endif
