@@ -216,7 +216,7 @@
         </div>
         <div class="row">
             <div class="col text-right">
-                <a href="mailto:info@gotoperu.co" class="btn btn-link font-weight-bold py-2 px-0">info@gotoperu.co</a>
+                <a href="mailto:colombia@gotoperu.co" class="btn btn-link font-weight-bold py-2 px-0">colombia@gotoperu.co</a>
             </div>
         </div>
         <div class="row mt-4" v-if="!formshow">

@@ -116,7 +116,7 @@
                                     </div>
                                     <div class="col">
                                         <h6 class="font-weight-bold text-secondary">Consulte ahora por Whatsapp</h6>
-                                        <a href="https://api.whatsapp.com/send?phone=51960106076" target="_blank" class="text-secondary h4 font-weight-bold stretched-link">+51 960 106 076</a>
+                                        <a href="https://api.whatsapp.com/send?phone=51960680005" target="_blank" class="text-secondary h4 font-weight-bold stretched-link">+51 960 680 005</a>
                                     </div>
                                 </div>
 {{--                                <h5 class="font-weight-bold text-secondary">Tour highligh</h5>--}}
