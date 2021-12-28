@@ -26,7 +26,7 @@
                                 <div class="row justify-content-center">
                                     <div class="col-12 col-sm-8">
                                         <div class="row justify-content-center">
-                                            <div class="col-12 col-md-4 my-5 text-center">
+                                            <div class="col-6 col-md-4 my-5 text-center">
                                                 <h5 class="text-white font-weight-bold h1">Ventas</h5>
                                                 <img class="w-100"
                                                      src="{{asset('images/logo-gotoperu-white.png')}}"
@@ -37,7 +37,7 @@
                                     </div>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <div class="col-5 col-sm col-md-5">
+                                    <div class="col-12 col-sm col-md-5">
                                         <div class="text-center bg-white mb-3 text-dark rounded shadow py-3">
                                             <h1 class="font-weight-bold"><span class="text-g-green">Hola</span> {{ucwords(strtolower($inquire->nombre))}}</h1>
                                             <p class="h4">Mi nombre es <span class="text-g-yellow">{{$t_advisor->name}}</span>,</p>
