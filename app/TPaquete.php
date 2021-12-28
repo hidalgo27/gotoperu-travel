@@ -42,4 +42,14 @@ class TPaquete extends Model
     {
         return $this->hasMany(TPaqueteIncluyeIcono::class, 'idpaquetes');
     }
+
+    public function paquete_incluye()
+    {
+        return $this->hasMany(TPaqueteIncluye::class, 'idpaquetes');
+    }
+
+    public function paquete_no_incluye()
+    {
+        return $this->hasMany(TPaqueteNoIncluye::class, 'idpaquetes');
+    }
 }

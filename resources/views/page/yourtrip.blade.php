@@ -1,4 +1,4 @@
-@extends('layouts.page.app')
+@extends('layouts.page.traveller')
 @section('seo')
     <title>Viajes a Perú 2021 y Tours Todo Incluido a Machu Picchu</title>
 	<meta name="description" content="Encuentra Tu Paquete Turístico Todo Incluido y Reserva Tu Próximo Viaje en Perú 2021/2022 Desde México ¡ Reservas Online GoTo Perú !"/>
@@ -6,55 +6,66 @@
 @section('content')
 
     @foreach($paquete_iti as $paquetes)
-        <section class="header-video">
-            <div id="overlay">
-                <img src="{{asset('images/banners/itinerary/GTM87.jpg')}}" alt="about us gotoperu" id="hero-vid" class="banner-itinerary">
+        <header class="header-detail h-75">
+            <div class="overlay"></div>
+            {{--            <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">--}}
+            {{--                <source src="{{asset('media/Secuencia 06.mp4')}}" type="video/mp4">--}}
+            {{--            </video>--}}
+            <div class="homepage-video">
+                @foreach($paquetes->imagen_paquetes->take(1) as $imagen)
+                    <img src="{{$imagen->nombre}}" alt="{{$paquetes->titulo}}" loading="lazy">
+                @endforeach
+
             </div>
-            <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <div class="row justify-content-center mt-5">
-                                <div class="col-12 col-sm-8">
-                                    <div class="row justify-content-center">
-                                        <div class="col-12 col-md-6 my-5 text-center">
-                                            <h5 class="text-white display-4">Ventas</h5>
-                                            <img class="w-100 lazy has-webp"
-                                                 data-src="{{asset('images/logos/logo-gotoperu-ave-w.png')}}"
-                                                 data-srcset="{{asset('images/logos/logo-gotoperu-ave-w.png')}}" alt="logo gotoperu">
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center">
-                                        <div class="col-12 col-sm col-md">
-                                            <div class="text-center bg-rgba-white rounded shadow py-3">
-                                                <h1 class="font-weight-bold"><span class="text-g-green">Hi</span> {{ucwords(strtolower($inquire->nombre))}}</h1>
-                                                <p class="h4">My name is <span class="text-g-yellow">Daniel</span>,</p>
-                                                <p class="font-weight-bold">I'm your personal Travel Advisor</p>
-                                                <p class="mt-4 text-primary font-weight-bold">Let’s Start Planning!</p>
-                                                {{--<a href="#content-page">--}}
-                                                {{--<i data-feather="chevron-down" class="d-block mx-auto" width="45" height="45" stroke-width="1"></i>--}}
-                                                {{--</a>--}}
+            <div class="container h-75">
+                <div class="row d-flex h-75 text-center align-items-center">
+                    <div class="col w-100 text-white">
+
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <div class="row justify-content-center">
+                                    <div class="col-12 col-sm-8">
+                                        <div class="row justify-content-center">
+                                            <div class="col-12 col-md-4 my-5 text-center">
+                                                <h5 class="text-white font-weight-bold h1">Ventas</h5>
+                                                <img class="w-100"
+                                                     src="{{asset('images/logo-gotoperu-white.png')}}"
+                                                     alt="logo gotoperu">
                                             </div>
                                         </div>
-                                        <div class="col-12 col-sm col-md">
-                                            <a class="venobox" data-autoplay="true" data-vbtype="video" href="https://youtu.be/OwzqiL4DC6Y">
-                                                <div class="position-relative">
-                                                    <img src="{{asset('images/video-testimonio/1559771366269testimonio-1.jpg')}}" alt="" class="w-100 shadow-sm rounded">
-                                                    <div class="position-absolute-bottom text-white p-3 icon-play">
-                                                        <i class="fas fa-play fa-2x"></i>
-                                                    </div>
-                                                </div>
-                                            </a>
+
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-5 col-sm col-md-5">
+                                        <div class="text-center bg-white mb-3 text-dark rounded shadow py-3">
+                                            <h1 class="font-weight-bold"><span class="text-g-green">Hola</span> {{ucwords(strtolower($inquire->nombre))}}</h1>
+                                            <p class="h4">Mi nombre es <span class="text-g-yellow">{{$t_advisor->name}}</span>,</p>
+                                            <p class="font-weight-bold">Soy tu asesor de viaje personal</p>
+                                            <p class="mt-4 text-primary font-weight-bold">¡Empecemos a planificar su viaje ideal!</p>
+                                            {{--<a href="#content-page">--}}
+                                            {{--<i data-feather="chevron-down" class="d-block mx-auto" width="45" height="45" stroke-width="1"></i>--}}
+                                            {{--</a>--}}
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
-
-        </section>
+            <div class="position-absolute-bottom p-2">
+                <div class="row justify-content-center">
+                    <div class="col-auto text-center">
+                        <a href="#title_section" class="mx-2">
+                            <i data-feather="chevrons-down" class="text-white" stroke-width="1" height="50" width="50"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
 
 
         <section class="bg-white">
@@ -80,7 +91,8 @@
                                 <p class="h5 font-weight-normal"><b>Departure:</b> {{$fecha_inquire}}</p>
                                 <p class="h5 font-weight-normal"><b>Destinations:</b></p>
                                 @foreach($paquete_destinos->where('idpaquetes',$paquetes->id) as $paquete_destino)
-{{--                                    <a href="{{route('destination_show_path', ['peru-travel', str_replace(' ', '-', strtolower($paquete_destino->destinos->nombre))])}}-tours"><img src="{{asset('images/destinations/destinations/'.str_replace(' ','-', strtolower($paquete_destino->destinos->nombre)).'')}}.jpg" alt="" width="50" height="50" class="rounded-circle" data-toggle="tooltip" data-placement="top" title="{{ucwords(strtolower($paquete_destino->destinos->nombre))}}">--}}
+                                    <a href="">
+                                        <img src="{{$paquete_destino->destinos->imagen}}" alt="" width="50" height="50" class="rounded-circle" data-toggle="tooltip" data-placement="top" title="{{ucwords(strtolower($paquete_destino->destinos->nombre))}}">
                                     </a>
                                 @endforeach
                             </div>
@@ -112,9 +124,12 @@
                                                 </div>
                                                 <div class="col-12 col-md-12 col-lg">
                                                     <div class="box15 float-right rounded">
-                                                        @foreach($imagen->where('iditinerario', $itinerario->itinerarios->id)->take(1) as $img)
-                                                            <img src="{{asset('images/itinerario/'.$img->nombre.'')}}" alt="" class="rounded">
+                                                        @foreach($itinerario->itinerarios->itinerario_imagen->take(1) as $imagen)
+                                                            <img src="{{$imagen->nombre}}" alt="" class="rounded">
                                                         @endforeach
+{{--                                                        @foreach($imagen->where('iditinerario', $itinerario->itinerarios->id)->take(1) as $img)--}}
+{{--                                                            <img src="{{asset('images/itinerario/'.$img->nombre.'')}}" alt="" class="rounded">--}}
+{{--                                                        @endforeach--}}
                                                         <div class="box-content text-center">
                                                             <h3 class="title">View Gallery</h3>
                                                             <ul class="icon p-0">
@@ -133,7 +148,7 @@
                                                                             @php
                                                                                 $k = 0;
                                                                             @endphp
-                                                                            @foreach($imagen->where('iditinerario', $itinerario->itinerarios->id) as $img)
+                                                                            @foreach($itinerario->itinerarios->itinerario_imagen as $img)
                                                                                 @if($k == 0)
                                                                                     @php $act = 'active'; @endphp
                                                                                 @else
@@ -141,7 +156,7 @@
                                                                                 @endif
 
                                                                                 <div class="carousel-item {{$act}}">
-                                                                                    <img class="d-block w-100 rounded" src="{{asset('images/itinerario/'.$img->nombre.'')}}" alt="First slide">
+                                                                                    <img class="d-block w-100 rounded" src="{{$img->nombre}}" alt="First slide">
                                                                                 </div>
 
                                                                                 @php $k++; @endphp
@@ -344,14 +359,15 @@
                         </div>
                     </div>
                     <div class="col col-md-4">
-                        <div class="card bg-light sticky-top sticky-top-50 mt-4">
+                        <div class="sticky-top sticky-top-50">
+                        <div class="card bg-light mt-4">
                             <div class="card-body">
                                 <div class="row align-items-center">
                                     <div class="col-auto">
-                                        <img src="{{asset('images/team-1.jpg')}}" alt="" width="80" height="80" class="rounded-circle">
+                                        <img src="https://gotoperu-mx.s3-us-west-1.amazonaws.com/team/yovana.jpg" alt="" width="80" height="80" class="rounded-circle">
                                     </div>
                                     <div class="col text-truncate">
-                                        <h4>Daniel McKenna</h4>
+                                        <h4>{{$t_advisor->name}}</h4>
                                         (202) 996-3000
                                     </div>
                                 </div>
@@ -360,9 +376,23 @@
                                     <div class="col text-center">
                                         <a href="https://m.me/GOTOPERUcom/" class="btn btn-primary" target="_blank"><i class="fab fa-facebook-messenger"></i> Messenger</a>
                                         <a href="https://api.whatsapp.com/send?phone=19294807000" class="btn btn-success" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                                        <a href="" class="btn btn-dark mt-2 w-50"><img src="https://apps.google.com/static/img/meet-logo.svg" alt="" class="w-100"></a>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12 col-sm col-md">
+                                <a class="venobox" data-autoplay="true" data-vbtype="video" href="https://youtu.be/OwzqiL4DC6Y">
+                                    <div class="position-relative">
+                                        <img src="{{asset('images/video-testimonial/1.jpg')}}" alt="" class="w-100 shadow-sm rounded">
+                                        <div class="position-absolute-bottom text-white p-3 icon-play">
+                                            <i class="fas fa-play fa-2x"></i>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>

@@ -18,6 +18,7 @@ use App\TTour;
 use App\TBlog_post;
 use App\TBlog_categoria;
 use App\TSeo;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
@@ -34,7 +35,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 class HomepageController extends Controller
 {
-    
+
     public function index(){
         SEOMeta::setTitle('Paquetes de Viajes y Tour a Machu Picchu en Perú 2021');
         SEOMeta::setDescription('¡Reserva! Viajes y Paquetes Turísticos a Machu Picchu, Nuestros Expertos Operadores de Tours el Ayudaran a Planificar los Mejores Paquetes y Destinos en Perú');
@@ -489,7 +490,7 @@ class HomepageController extends Controller
             OpenGraph::addProperty('locale', $seo->first()->localizacion);
             OpenGraph::setSiteName($seo->first()->nombre_sitio);
             OpenGraph::addImage($seo->first()->imagen, ['height' => $seo->first()->imagen_height, 'width' => $seo->first()->imagen_width]);
-            
+
             if($seo->first()->microdata){
                 JsonLd::setTitle($seo->first()->microdata);
             }
@@ -537,7 +538,7 @@ class HomepageController extends Controller
             OpenGraph::addProperty('locale', $seo->first()->localizacion);
             OpenGraph::setSiteName($seo->first()->nombre_sitio);
             OpenGraph::addImage($seo->first()->imagen, ['height' => $seo->first()->imagen_height, 'width' => $seo->first()->imagen_width]);
-        
+
             if($seo->first()->microdata){
                 JsonLd::setTitle($seo->first()->microdata);
             }
@@ -601,7 +602,7 @@ class HomepageController extends Controller
             OpenGraph::addProperty('type', $seo->first()->tipo);
             OpenGraph::setSiteName($seo->first()->nombre_sitio);
             OpenGraph::addImage($seo->first()->imagen, ['height' => $seo->first()->imagen_height, 'width' => $seo->first()->imagen_width]);
-        
+
             if($seo->first()->microdata){
                 JsonLd::setTitle($seo->first()->microdata);
             }
@@ -676,10 +677,10 @@ class HomepageController extends Controller
         SEOMeta::setCanonical("https://gotoperu.co/blog");
 
         $posts=TBlog_post::with(['user','categoria','imagenes'])->paginate(5);
-        $categorias_aux = TBlog_categoria::get(); 
+        $categorias_aux = TBlog_categoria::get();
         $categorias = collect();
-        foreach ($categorias_aux as $cat) { 
-            $idCat = $cat->id; 
+        foreach ($categorias_aux as $cat) {
+            $idCat = $cat->id;
             $consulta = TBlog_post::where('categoria_id',$idCat)->count();
             $categorias->push([$cat->nombre,$consulta]);
         }
@@ -696,11 +697,11 @@ class HomepageController extends Controller
         $categoria_aux=TBlog_categoria::where('nombre',$categoria)->first();
         $posts = TBlog_post::with(['user', 'imagenes', 'categoria'])
             ->where('categoria_id',$categoria_aux->id)->paginate(5);
-        
-        $categorias_aux = TBlog_categoria::get(); 
+
+        $categorias_aux = TBlog_categoria::get();
         $categorias = collect();
-        foreach ($categorias_aux as $cat) { 
-            $idCat = $cat->id; 
+        foreach ($categorias_aux as $cat) {
+            $idCat = $cat->id;
             $consulta = TBlog_post::where('categoria_id',$idCat)->count();
             $categorias->push([$cat->nombre,$consulta]);
         }
@@ -733,7 +734,7 @@ class HomepageController extends Controller
             OpenGraph::addProperty('locale', $seo->first()->localizacion);
             OpenGraph::setSiteName($seo->first()->nombre_sitio);
             OpenGraph::addImage($seo->first()->imagen, ['height' => $seo->first()->imagen_height, 'width' => $seo->first()->imagen_width]);
-            
+
             if($seo->first()->microdata){
                 JsonLd::setTitle($seo->first()->microdata);
             }
@@ -747,10 +748,10 @@ class HomepageController extends Controller
             OpenGraph::addImage($post->imagen_miniatura, ['height' => 280, 'width' => 420]);
         }
 
-        $categorias_aux = TBlog_categoria::get(); 
+        $categorias_aux = TBlog_categoria::get();
         $categorias = collect();
-        foreach ($categorias_aux as $cat) { 
-            $idCat = $cat->id; 
+        foreach ($categorias_aux as $cat) {
+            $idCat = $cat->id;
             $consulta = TBlog_post::where('categoria_id',$idCat)->count();
             $categorias->push([$cat->nombre,$consulta]);
         }
@@ -766,18 +767,20 @@ class HomepageController extends Controller
             ->take(3)
             ->with(['user','categoria','imagenes'])
             ->get();
-        
+
         return view('page.blogDetail', compact('post','categorias','recentPosts','postsRelacionados'));
     }
-    
+
 
     public function yourtrip($id)
     {
 //        dd(Crypt::encrypt($id));
 
-        $id = Crypt::decrypt($id);
+        $id = base64_decode($id);
 
         $inquire = TPasajero::find($id);
+
+        $t_advisor = User::find($inquire->id_usuario);
 
         $paquete = TPaquete::with('paquetes_destinos', 'precio_paquetes', 'imagen_paquetes', 'paquete_incluye', 'paquete_no_incluye')->where('estado', 0)->get();
         $paquete_destinos = TPaqueteDestino::with('destinos')->get();
@@ -794,6 +797,6 @@ class HomepageController extends Controller
 
         $imagen = TItinerarioImagen::with('itinerario')->get();
 
-        return view('page.yourtrip', compact('paquete_destinos','paquete_iti','hoteles','hoteles_destinos','dificultad','imagen','inquire'));
+        return view('page.yourtrip', compact('paquete_destinos','paquete_iti','hoteles','hoteles_destinos','dificultad','imagen','inquire', 't_advisor'));
     }
 }
