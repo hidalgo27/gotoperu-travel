@@ -118,16 +118,17 @@
                     <div class="col">
                         <h6 class="text-white font-weight-bold">PERÚ</h6>
                         <div class="line-subtitle"></div>
-                        <p class="m-0 text-g-yellow"><i data-feather="chevron-right" class="text-white" stroke-width="1"></i> Av. El Sol 449, Oficina 301.</p>
                         <p class="m-0 text-g-yellow"><i data-feather="chevron-right" class="text-white" stroke-width="1"></i> Cusco Centro Historico</p>
                         <p class="m-0 text-g-yellow"><i data-feather="chevron-right" class="text-white" stroke-width="1"></i> Ciudad del Cusco</p>
                     </div>
                     <div class="col">
-                        <h6 class="text-white font-weight-bold">Colombia</h6>
+                        <h6 class="text-white font-weight-bold">Dirección</h6>
                         <div class="line-subtitle"></div>
-                        <p class="m-0 text-g-yellow"><i data-feather="chevron-right" class="text-white" stroke-width="1"></i> Calle 26 # 92-32</p>
-                        <p class="m-0 text-g-yellow"><i data-feather="chevron-right" class="text-white" stroke-width="1"></i> Bogotá</p>
-                        <p class="m-0 text-g-yellow"><i data-feather="chevron-right" class="text-white" stroke-width="1"></i> 110911</p>
+                        <p class="m-0 text-g-yellow"><i data-feather="chevron-right" class="text-white" stroke-width="1"></i> Av. El Sol 449, Oficina 301.</p>
+{{--                        <p class="m-0 text-g-yellow"><i data-feather="chevron-right" class="text-white" stroke-width="1"></i> Calle 26 # 92-32</p>--}}
+{{--                        <p class="m-0 text-g-yellow"><i data-feather="chevron-right" class="text-white" stroke-width="1"></i> Bogotá</p>--}}
+{{--                        <p class="m-0 text-g-yellow"><i data-feather="chevron-right" class="text-white" stroke-width="1"></i> 110911</p>--}}
+
                     </div>
                     <div class="col">
                         <h6 class="text-white font-weight-bold">Compartir en:</h6>

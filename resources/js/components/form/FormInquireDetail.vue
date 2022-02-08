@@ -189,7 +189,7 @@
         </div>
         <div class="row">
             <div class="col text-right">
-                <a href="mailto:colombia@gotoperu.co" class="btn btn-link font-weight-bold py-2 px-0">colombia@gotoperu.co</a>
+                <a href="mailto:info@gotoperu.com" class="btn btn-link font-weight-bold py-2 px-0">info@gotoperu.com</a>
             </div>
         </div>
         <div class="row mt-4" v-if="!formshow">

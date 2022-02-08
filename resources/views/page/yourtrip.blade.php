@@ -1,4 +1,4 @@
-@extends('layouts.page.traveller')
+    @extends('layouts.page.traveller')
 @section('seo')
     <title>Viajes a Perú 2021 y Tours Todo Incluido a Machu Picchu</title>
 	<meta name="description" content="Encuentra Tu Paquete Turístico Todo Incluido y Reserva Tu Próximo Viaje en Perú 2021/2022 Desde México ¡ Reservas Online GoTo Perú !"/>
