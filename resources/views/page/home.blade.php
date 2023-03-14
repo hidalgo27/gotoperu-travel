@@ -12,11 +12,6 @@
         <div class="container h-100">
             <div class="row d-flex h-100 text-center align-items-center">
                 <div class="col w-100 text-white mt-5">
-                <div class="row">
-                    <div class="col text-center">
-                        <a href="{{asset('doc/PROMPERU-INFORMA-PER-31MAY21.pdf')}}" target="_blank" style="color: #59d8d8" class="h4 font-weight-bold">Update Covid-19</a>
-                    </div>
-                </div>
                     <h1 class="font-weight-lighter h2 mt-5">Top en Recomendaciones y Testimonios, sede central en Cusco</h1>
                     <a href="#consulte" class="btn btn-outline-g-yellow btn-lg h2 font-weight-normal mt-3">Diseña tu Viaje</a>
                     {{--                        <p class="lead mb-0">With HTML5 Video and Bootstrap 4</p>--}}
