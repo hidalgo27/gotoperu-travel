@@ -170,7 +170,7 @@
                         </div>
                     </div>
                     <div class="col px-3">
-                        <vue-tel-input v-model="el_telefono"></vue-tel-input>
+                        <vue-tel-input v-model="el_telefono" v-on:country-changed="countryChanged"></vue-tel-input>
                     </div>
                 </div>
 
@@ -330,6 +330,8 @@
                 el_telefono: '',
                 el_textarea: '',
 
+                country: "",
+
                 pickerOptions: {
                     disabledDate(time) {
                         return time.getTime() > Date.now();
@@ -367,6 +369,9 @@
             }
         },
         methods: {
+            countryChanged(country) {
+                this.country = country.name+'('+country.dialCode+')'
+            },
             selectDestino: function (destinoForm, checked) {
                 if (checked){
                     this.destinosSeleccionadosForm.push(destinoForm);
