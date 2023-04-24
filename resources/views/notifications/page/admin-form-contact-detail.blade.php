@@ -17,7 +17,7 @@
                         </td>
                         <td style="text-align:left">
                             <p><strong>Email: {{$email}}</strong></p>
-                            <p><strong>Phone: {{$telefono}}</strong></p>
+                            <p><strong>Phone: {{$country}} {{$telefono}}</strong></p>
                             <p><strong>Travel date: {{$fecha}}</strong></p>
                             <p><strong>Comment: {{$comentario}}</strong></p>
                         </td>
