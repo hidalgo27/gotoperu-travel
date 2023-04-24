@@ -408,6 +408,11 @@ class HomepageController extends Controller
             $telefono = $request->el_telefono;
         }
 
+        $country = '';
+        if ($request->country){
+            $country = $request->country;
+        }
+
         $comentario = '';
         if ($request->el_textarea){
             $comentario = $request->el_textarea;
@@ -442,6 +447,7 @@ class HomepageController extends Controller
                     'fecha' => $fecha,
                     'telefono' => $telefono,
                     'comentario' => $comentario,
+                    'country' => $country
 
                 ], function ($messaje) use ($from) {
                     $messaje->to($from, 'GotoPeru')

@@ -433,6 +433,7 @@
                     el_fecha: this.el_fecha,
                     el_telefono: this.el_telefono,
                     el_textarea: this.el_textarea,
+                    country: this.country
                 };
                 const self = this;
                 this.loadingdesign = true;

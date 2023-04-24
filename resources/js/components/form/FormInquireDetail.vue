@@ -142,7 +142,7 @@
                         </div>
                     </div>
                     <div class="col px-3">
-                        <vue-tel-input v-model="el_telefono"></vue-tel-input>
+                        <vue-tel-input v-model="el_telefono" v-on:country-changed="countryChanged"></vue-tel-input>
                     </div>
                 </div>
 
@@ -279,6 +279,8 @@
                 el_telefono: '',
                 el_textarea: '',
 
+                country: "",
+
                 pickerOptions: {
                     disabledDate(time) {
                         return time.getTime() > Date.now();
@@ -314,6 +316,9 @@
             }
         },
         methods: {
+            countryChanged(country) {
+                this.country = country.name+'('+country.dialCode+')'
+            },
             selectCategoryForm: function (categoriaForm, checked) {
                 if (checked){
                     this.categoriasSeleccionadosForm.push(categoriaForm);
@@ -365,6 +370,7 @@
                     el_fecha: this.el_fecha,
                     el_telefono: this.el_telefono,
                     el_textarea: this.el_textarea,
+                    country: this.country
                 };
 
                 const self = this;
