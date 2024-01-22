@@ -33,7 +33,7 @@
         .col-lge {
           max-width: 100% !important;
         }
-        ..col-md{
+        .col-md{
             max-width: 100% !important;
         }
       }
