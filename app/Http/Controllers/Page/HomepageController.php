@@ -19,9 +19,13 @@ use App\TBlog_post;
 use App\TBlog_categoria;
 use App\TSeo;
 use App\User;
+use Carbon\Carbon;
+use Exception;
+use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 use Artesaos\SEOTools\Facades\SEOMeta;
@@ -33,6 +37,8 @@ use GuzzleHttp\Client;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
+use Jenssegers\Agent\Agent;
+
 class HomepageController extends Controller
 {
 
@@ -53,6 +59,8 @@ class HomepageController extends Controller
         $categoria = TCategoria::all();
         $destino = TDestino::where('estado', 1)->get();
 
+        $agent = new Agent();
+
         $posts=TBlog_post::latest()
         ->take(3)
         ->with(['user','categoria','imagenes'])
@@ -64,7 +72,8 @@ class HomepageController extends Controller
                 'tours',
                 'categoria',
                 'destino',
-                'posts'
+                'posts',
+                'agent'
             ));
     }
 
@@ -251,14 +260,22 @@ class HomepageController extends Controller
             }
         }
 
-        $travellers_all = '';
-        if ($request->pasajeros_d){
-            foreach ($request->pasajeros_d as $pasajeros){
-                if (isset($pasajeros)){
-                    $travellers_all.=$pasajeros.',';
-                }
-            }
-        }
+//        $travellers_all = '';
+//        if ($request->pasajeros_d){
+//            foreach ($request->pasajeros_d as $pasajeros){
+//                if (isset($pasajeros)){
+//                    $travellers_all.=$pasajeros.',';
+//                }
+//            }
+//        }
+
+//        $travellers = $request->pasajeros_d; // Suponiendo que este es el array
+//
+//        if (is_array($travellers) && count($travellers) === 1) {
+//            $travellers = intval($travellers[0]);
+//        } else {
+//            $travellers = null; // O un valor predeterminado si no cumple las condiciones
+//        }
 
         $duration_all = '';
         if ($request->duracion_d){
@@ -267,6 +284,11 @@ class HomepageController extends Controller
                     $duration_all.=$duracion.',';
                 }
             }
+        }
+
+        $travellers_all = '';
+        if ($request->pasajeros_d){
+            $travellers_all = $request->pasajeros_d;
         }
 
         $nombre = '';
@@ -299,56 +321,111 @@ class HomepageController extends Controller
             $comentario = $request->el_textarea;
         }
 
-        $inquire = new TInquire();
-        $inquire->hotel = $category_all;
-        $inquire->destinos = $destination_all;
-        $inquire->pasajeros = $travellers_all;
-        $inquire->duracion = $duration_all;
-        $inquire->nombre = $nombre;
-        $inquire->email = $email;
-        $inquire->fecha = $fecha;
-        $inquire->telefono = $telefono;
-        $inquire->comentario = $comentario;
+//        $inquire = new TInquire();
+//        $inquire->hotel = $category_all;
+//        $inquire->destinos = $destination_all;
+//        $inquire->pasajeros = $travellers_all;
+//        $inquire->duracion = $duration_all;
+//        $inquire->nombre = $nombre;
+//        $inquire->email = $email;
+//        $inquire->fecha = $fecha;
+//        $inquire->telefono = $telefono;
+//        $inquire->comentario = $comentario;
 //        $inquire->save();
 
-        if ($inquire->save()){
-            try {
-                Mail::send(['html' => 'notifications.page.client-form-design'], ['nombre' => $nombre], function ($messaje) use ($email, $nombre) {
-                    $messaje->to($email, $nombre)
-                        ->subject('GotoPeru')
-                        /*->attach('ruta')*/
-                        ->from('info@gotoperu.com', 'GotoPeru');
-                });
-                Mail::send(['html' => 'notifications.page.admin-form-contact'], [
-                    'category_all' => $category_all,
-                    'destination_all' => $destination_all,
-                    'travellers_all' => $travellers_all,
-                    'duration_all' => $duration_all,
-
-                    'nombre' => $nombre,
-                    'email' => $email,
-                    'fecha' => $fecha,
-                    'telefono' => $telefono,
-                    'comentario' => $comentario,
-
-                    'country' => $country
-
-                ], function ($messaje) use ($from) {
-                    $messaje->to($from, 'GotoPeru')
-                        ->subject('GotoPeru')
-//                    ->cc($from2, 'GotoPeru')
-                        /*->attach('ruta')*/
-                        ->from('info@gotoperu.com', 'GotoPeru');
-                });
-
-                return 'Thank you.';
-            }
-            catch (Exception $e){
-                return $e;
-            }
+        try {
+            $travelDay = Carbon::parse($request->el_fecha);
+            $formattedDate = $travelDay->format('Y-m-d H:i:s');
+            $inquireDate = Carbon::now('America/Lima')->format('Y-m-d H:i:s');
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Fecha inválida.'], 400);
         }
 
+
+        $agent = new Agent();
+        $device = $agent->isMobile() ? 'Móvil' : ($agent->isTablet() ? 'Tablet' : 'Desktop');
+        $browser = $agent->browser();
+
+        $data = [
+            "category_d" => $request->category_d,
+            "destino_d" => $request->destino_d, // Aquí puedes agregar los destinos si los tienes
+            "pasajeros_d" => $request->pasajeros_d,
+            "duracion_d" => $request->duracion_d,
+            "el_nombre" => $request->el_nombre,
+            "el_email" => $request->el_email,
+            "el_fecha" => $formattedDate, // O puedes usar $this->travel_day si es relevante
+            "el_telefono" => $request->el_telefono,
+            "el_textarea" => $request->el_textarea,
+            'codigo_pais' => $request->country,
+            'country' => $request->country,
+            'device' => $device,
+            'browser' => $browser,
+            'origen' => "Web",
+            'producto' => "gotoperu.tours",
+            'inquire_date' => $inquireDate
+        ];
+
+//        dd($data);
+//        $response = Http::post('https://api.gotoecuador.com/api/store/inquire', $data);
+
+        try {
+            $client = new Client();
+            $response = $client->post('https://api.gotoecuador.com/api/store/inquire', [
+                'json' => $data
+            ]);
+            $responseData = json_decode($response->getBody(), true);
+
+            if ($responseData){
+                try {
+                    Mail::send(['html' => 'notifications.page.client-form-design'], ['nombre' => $nombre], function ($messaje) use ($email, $nombre) {
+                        $messaje->to($email, $nombre)
+                            ->subject('GotoPeru')
+                            /*->attach('ruta')*/
+                            ->from('info@gotoperu.com', 'GotoPeru');
+                    });
+                    Mail::send(['html' => 'notifications.page.admin-form-contact'], [
+                        'category_all' => $category_all,
+                        'destination_all' => $destination_all,
+                        'travellers_all' => $travellers_all,
+                        'duration_all' => $duration_all,
+
+                        'nombre' => $nombre,
+                        'email' => $email,
+                        'fecha' => $fecha,
+                        'telefono' => $telefono,
+                        'comentario' => $comentario,
+
+                        'country' => $country
+
+                    ], function ($messaje) use ($from) {
+                        $messaje->to($from, 'GotoPeru')
+                            ->subject('GotoPeru')
+//                    ->cc($from2, 'GotoPeru')
+                            /*->attach('ruta')*/
+                            ->from('info@gotoperu.com', 'GotoPeru');
+                    });
+
+                    return 'Thank you.';
+                }
+                catch (Exception $e){
+                    return response()->json(['error' => 'Error al enviar correos: ' . $e->getMessage()], 500);
+                }
+            }else{
+                return response()->json(['error' => 'Hubo un problema enviando la información al servicio.'], 500);
+
+            }
+        } catch (RequestException $e) {
+            if ($e->hasResponse()) {
+                $errorResponse = $e->getResponse()->getBody()->getContents();
+                return response()->json(['error' => $errorResponse], 500);
+            }
+            return response()->json(['error' => 'Error al conectar con el servicio.'], 500);
+        }
+
+
+
     }
+
 
     public function formulario_detail(Request $request)
     {
@@ -364,14 +441,22 @@ class HomepageController extends Controller
             }
         }
 
-        $travellers_all = '';
-        if ($request->pasajeros_d){
-            foreach ($request->pasajeros_d as $pasajeros){
-                if (isset($pasajeros)){
-                    $travellers_all.=$pasajeros.',';
-                }
-            }
-        }
+//        $travellers_all = '';
+//        if ($request->pasajeros_d){
+//            foreach ($request->pasajeros_d as $pasajeros){
+//                if (isset($pasajeros)){
+//                    $travellers_all.=$pasajeros.',';
+//                }
+//            }
+//        }
+
+//        $travellers = $request->pasajeros_d; // Suponiendo que este es el array
+//
+//        if (is_array($travellers) && count($travellers) === 1) {
+//            $travellers = intval($travellers[0]);
+//        } else {
+//            $travellers = null; // O un valor predeterminado si no cumple las condiciones
+//        }
 
         $duration_all = '';
         if ($request->duracion_d){
@@ -388,6 +473,11 @@ class HomepageController extends Controller
             $titulo_package = $titulo_p->titulo;
         }
 
+        $travellers_all = '';
+        if ($request->pasajeros_d){
+            $travellers_all = $request->pasajeros_d;
+        }
+
         $nombre = '';
         if ($request->el_nombre){
             $nombre = $request->el_nombre;
@@ -418,17 +508,59 @@ class HomepageController extends Controller
             $comentario = $request->el_textarea;
         }
 
-        $inquire = new TInquire();
-        $inquire->hotel = $category_all;
-        $inquire->pasajeros = $travellers_all;
-        $inquire->duracion = $duration_all;
-        $inquire->nombre = $nombre;
-        $inquire->email = $email;
-        $inquire->fecha = $fecha;
-        $inquire->telefono = $telefono;
-        $inquire->comentario = $comentario;
+        // Parsear la fecha recibida de Livewire, que probablemente esté en un formato legible como "9 Oct 2024"
+        $travelDay = Carbon::parse($request->el_fecha);
 
-        if ($inquire->save()){
+        // Formatear la fecha a ISO 8601 ("Y-m-d\TH:i:s.v\Z"), que es el formato deseado
+//        $formattedDate = $travelDay->format('Y-m-d\TH:i:s.v\Z');
+        $formattedDate = $travelDay->format('Y-m-d H:i:s');
+
+        $inquireDate = Carbon::now('America/Lima')->format('Y-m-d H:i:s');
+
+
+        $agent = new Agent();
+        $device = $agent->isMobile() ? 'Móvil' : ($agent->isTablet() ? 'Tablet' : 'Desktop');
+        $browser = $agent->browser();
+
+        $data = [
+            "package" => $titulo_package,
+            "category_d" => $request->category_d,
+            "destino_d" => [], // Aquí puedes agregar los destinos si los tienes
+            "pasajeros_d" => $request->pasajeros_d,
+            "duracion_d" => $request->duracion_d,
+            "el_nombre" => $request->el_nombre,
+            "el_email" => $request->el_email,
+            "el_fecha" => $formattedDate, // O puedes usar $this->travel_day si es relevante
+            "el_telefono" => $request->el_telefono,
+            "el_textarea" => $request->el_textarea,
+            'codigo_pais' => $request->country,
+            'country' => $request->country,
+            'device' => $device,
+            'browser' => $browser,
+            'origen' => "Web",
+            'producto' => "gotoperu.tours",
+            'inquire_date' => $inquireDate
+        ];
+
+//        $response = Http::post('https://api.gotoecuador.com/api/store/inquire', $data);
+
+        $client = new Client();
+        $response = $client->post('https://api.gotoecuador.com/api/store/inquire', [
+            'json' => $data
+        ]);
+        $responseData = json_decode($response->getBody(), true);
+
+//        $inquire = new TInquire();
+//        $inquire->hotel = $category_all;
+//        $inquire->pasajeros = $travellers_all;
+//        $inquire->duracion = $duration_all;
+//        $inquire->nombre = $nombre;
+//        $inquire->email = $email;
+//        $inquire->fecha = $fecha;
+//        $inquire->telefono = $telefono;
+//        $inquire->comentario = $comentario;
+
+        if ($responseData) {
             try {
                 Mail::send(['html' => 'notifications.page.client-form-design'], ['nombre' => $nombre], function ($messaje) use ($email, $nombre) {
                     $messaje->to($email, $nombre)
@@ -462,6 +594,9 @@ class HomepageController extends Controller
             catch (Exception $e){
                 return $e;
             }
+        }else{
+            return response()->json(['error' => 'Hubo un problema enviando la información al servicio.'], 500);
+
         }
     }
 

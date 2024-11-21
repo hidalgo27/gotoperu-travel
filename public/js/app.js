@@ -3884,6 +3884,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3944,7 +3954,7 @@ __webpack_require__.r(__webpack_exports__);
         value: '4'
       }, {
         nombre: 'Lago Titicaca',
-        value: '5'
+        value: '5+'
       }],
       durations_form: [{
         duration: '3-5'
@@ -4025,15 +4035,20 @@ __webpack_require__.r(__webpack_exports__);
       } // console.log(this.categoriasSeleccionadosForm);
 
     },
-    selectNumeroPasajerosForm: function selectNumeroPasajerosForm(pasajerosForm, checked) {
-      if (checked) {
-        this.pasajerosSeleccionadosForm.push(pasajerosForm);
-        console.log(pasajerosForm);
-      } else {
-        var index = this.pasajerosSeleccionadosForm.indexOf(pasajerosForm);
-        this.$delete(this.pasajerosSeleccionadosForm, index);
-        console.log(index);
-      }
+    // selectNumeroPasajerosForm: function (pasajerosForm, checked) {
+    //     if (checked){
+    //         this.pasajerosSeleccionadosForm.push(pasajerosForm);
+    //         console.log(pasajerosForm);
+    //     }else{
+    //         let index = this.pasajerosSeleccionadosForm.indexOf(pasajerosForm);
+    //         this.$delete(this.pasajerosSeleccionadosForm, index);
+    //         console.log(index);
+    //     }
+    // },
+    selectNumeroPasajerosForm: function selectNumeroPasajerosForm(pasajerosForm) {
+      // Sobrescribe directamente con el valor del radio seleccionado
+      this.pasajerosSeleccionadosForm = pasajerosForm;
+      console.log(pasajerosForm);
     },
     selectDuracionForm: function selectDuracionForm(duracionForm, checked) {
       if (checked) {
@@ -4331,6 +4346,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['paquetesId'],
   data: function data() {
@@ -4367,7 +4383,7 @@ __webpack_require__.r(__webpack_exports__);
         value: '4'
       }, {
         nombre: 'Lago Titicaca',
-        value: '5'
+        value: '5+'
       }],
       durations_form: [{
         duration: '3-5'
@@ -4434,15 +4450,20 @@ __webpack_require__.r(__webpack_exports__);
         console.log(index);
       }
     },
-    selectNumeroPasajerosForm: function selectNumeroPasajerosForm(pasajerosForm, checked) {
-      if (checked) {
-        this.pasajerosSeleccionadosForm.push(pasajerosForm);
-        console.log(pasajerosForm);
-      } else {
-        var index = this.pasajerosSeleccionadosForm.indexOf(pasajerosForm);
-        this.$delete(this.pasajerosSeleccionadosForm, index);
-        console.log(index);
-      }
+    // selectNumeroPasajerosForm: function (pasajerosForm, checked) {
+    //     if (checked){
+    //         this.pasajerosSeleccionadosForm.push(pasajerosForm);
+    //         console.log(pasajerosForm);
+    //     }else{
+    //         let index = this.pasajerosSeleccionadosForm.indexOf(pasajerosForm);
+    //         this.$delete(this.pasajerosSeleccionadosForm, index);
+    //         console.log(index);
+    //     }
+    // },
+    selectNumeroPasajerosForm: function selectNumeroPasajerosForm(pasajerosForm) {
+      // Sobrescribe directamente con el valor del radio seleccionado
+      this.pasajerosSeleccionadosForm = pasajerosForm;
+      console.log(pasajerosForm);
     },
     selectDuracionForm: function selectDuracionForm(duracionForm, checked) {
       if (checked) {
@@ -4619,6 +4640,21 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -101047,9 +101083,7 @@ var render = function() {
                                   on: { checked: _vm.selectNumeroPasajerosForm }
                                 })
                               ]
-                            }),
-                            _vm._v(" "),
-                            _vm._m(7)
+                            })
                           ],
                           2
                         )
@@ -101057,13 +101091,13 @@ var render = function() {
                     ]
                   ),
                   _vm._v(" "),
-                  _vm._m(8),
+                  _vm._m(7),
                   _vm._v(" "),
                   _c(
                     "div",
                     { staticClass: "row align-items-center no-gutters border" },
                     [
-                      _vm._m(9),
+                      _vm._m(8),
                       _vm._v(" "),
                       _c("div", { staticClass: "col px-3" }, [
                         _c(
@@ -101081,9 +101115,7 @@ var render = function() {
                                   on: { checked: _vm.selectDuracionForm }
                                 })
                               ]
-                            }),
-                            _vm._v(" "),
-                            _vm._m(10)
+                            })
                           ],
                           2
                         )
@@ -101327,7 +101359,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                Siguiente >>\n            "
+                              "\n                    Siguiente >>\n                "
                             )
                           ]
                         )
@@ -101343,7 +101375,11 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("\n                < Atrás\n            ")]
+                          [
+                            _vm._v(
+                              "\n                    < Atrás\n                "
+                            )
+                          ]
                         ),
                     _vm._v(" "),
                     _vm.tap_form_show === false
@@ -101362,7 +101398,11 @@ var render = function() {
                               "btn btn-success btn-lg text-white font-weight-bold",
                             attrs: { type: "submit" }
                           },
-                          [_vm._v("\n                Enviar\n            ")]
+                          [
+                            _vm._v(
+                              "\n                    Enviar\n                "
+                            )
+                          ]
                         )
                       : _vm._e(),
                     _vm._v(" "),
@@ -101398,14 +101438,14 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _vm._m(11),
+      _vm._m(9),
       _vm._v(" "),
       !_vm.formshow
         ? _c("div", { staticClass: "row mt-4" }, [
             _c("div", { staticClass: "col" }, [
               _c("div", { staticClass: "alert alert-success" }, [
                 _c("div", { staticClass: "row align-items-center" }, [
-                  _vm._m(12),
+                  _vm._m(10),
                   _vm._v(" "),
                   _c("div", { staticClass: "col text-center" }, [
                     _c("h4", { staticClass: "font-weight-bold" }, [
@@ -101438,7 +101478,7 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(13)
+                  _vm._m(11)
                 ])
               ])
             ])
@@ -101549,19 +101589,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-2" }, [
-      _c("div", { staticClass: "input-group input-group-sm" }, [
-        _c("input", {
-          staticClass: "form-control font-weight-bold",
-          attrs: { type: "text", placeholder: "Especifica" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row mt-4" }, [
       _c("div", { staticClass: "col text-center" }, [
         _c("h5", { staticClass: "font-weight-bold" }, [
@@ -101583,19 +101610,6 @@ var staticRenderFns = [
         ])
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-2" }, [
-      _c("div", { staticClass: "input-group input-group-sm" }, [
-        _c("input", {
-          staticClass: "form-control font-weight-bold",
-          attrs: { type: "text", placeholder: "Especifica" }
-        })
-      ])
-    ])
   },
   function() {
     var _vm = this
@@ -101734,9 +101748,7 @@ var render = function() {
                                   on: { checked: _vm.selectNumeroPasajerosForm }
                                 })
                               ]
-                            }),
-                            _vm._v(" "),
-                            _vm._m(4)
+                            })
                           ],
                           2
                         )
@@ -101744,13 +101756,13 @@ var render = function() {
                     ]
                   ),
                   _vm._v(" "),
-                  _vm._m(5),
+                  _vm._m(4),
                   _vm._v(" "),
                   _c(
                     "div",
                     { staticClass: "row align-items-center no-gutters border" },
                     [
-                      _vm._m(6),
+                      _vm._m(5),
                       _vm._v(" "),
                       _c("div", { staticClass: "col px-3" }, [
                         _c(
@@ -101768,9 +101780,7 @@ var render = function() {
                                   on: { checked: _vm.selectDuracionForm }
                                 })
                               ]
-                            }),
-                            _vm._v(" "),
-                            _vm._m(7)
+                            })
                           ],
                           2
                         )
@@ -102014,7 +102024,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                Siguiente >>\n            "
+                              "\n                    Siguiente >>\n                "
                             )
                           ]
                         )
@@ -102030,7 +102040,11 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("\n                < Atrás\n            ")]
+                          [
+                            _vm._v(
+                              "\n                    < Atrás\n                "
+                            )
+                          ]
                         ),
                     _vm._v(" "),
                     _vm.tap_form_show === false
@@ -102049,7 +102063,11 @@ var render = function() {
                               "btn btn-success btn-lg text-white font-weight-bold",
                             attrs: { type: "submit" }
                           },
-                          [_vm._v("\n                Enviar\n            ")]
+                          [
+                            _vm._v(
+                              "\n                    Enviar\n                "
+                            )
+                          ]
                         )
                       : _vm._e(),
                     _vm._v(" "),
@@ -102085,14 +102103,14 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _vm._m(8),
+      _vm._m(6),
       _vm._v(" "),
       !_vm.formshow
         ? _c("div", { staticClass: "row mt-4" }, [
             _c("div", { staticClass: "col" }, [
               _c("div", { staticClass: "alert alert-success" }, [
                 _c("div", { staticClass: "row align-items-center" }, [
-                  _vm._m(9),
+                  _vm._m(7),
                   _vm._v(" "),
                   _c("div", { staticClass: "col text-center" }, [
                     _c("h4", { staticClass: "font-weight-bold" }, [
@@ -102125,7 +102143,7 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(10)
+                  _vm._m(8)
                 ])
               ])
             ])
@@ -102197,19 +102215,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-2" }, [
-      _c("div", { staticClass: "input-group input-group-sm" }, [
-        _c("input", {
-          staticClass: "form-control font-weight-bold",
-          attrs: { type: "text", placeholder: "Especifica" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row mt-4" }, [
       _c("div", { staticClass: "col text-center" }, [
         _c("h5", { staticClass: "font-weight-bold" }, [
@@ -102231,19 +102236,6 @@ var staticRenderFns = [
         ])
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-2" }, [
-      _c("div", { staticClass: "input-group input-group-sm" }, [
-        _c("input", {
-          staticClass: "form-control font-weight-bold",
-          attrs: { type: "text", placeholder: "Especifica" }
-        })
-      ])
-    ])
   },
   function() {
     var _vm = this
@@ -102441,11 +102433,15 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "col-auto text-center pr-1 form-search checkbox" },
+    { staticClass: "col-auto text-center pr-1 form-search radio" },
     [
       _c("input", {
-        attrs: { type: "checkbox", id: "np_" + _vm.numeroPasajerosForm.value },
-        domProps: { value: _vm.numeroPasajerosForm.pasajerosSeleccionadosForm },
+        attrs: {
+          type: "radio",
+          id: "np_" + _vm.numeroPasajerosForm.value,
+          name: "travellers"
+        },
+        domProps: { value: _vm.numeroPasajerosForm.value },
         on: { change: _vm.onchangepasajeros }
       }),
       _vm._v(" "),
@@ -102456,7 +102452,11 @@ var render = function() {
           attrs: { for: "np_" + _vm.numeroPasajerosForm.value }
         },
         [
-          _vm._v("\n        " + _vm._s(_vm.numeroPasajerosForm.value) + " "),
+          _vm._v(
+            "\n            " +
+              _vm._s(_vm.numeroPasajerosForm.value) +
+              "\n            "
+          ),
           _c("i", { attrs: { "data-feather": "user", "stroke-width": "1" } })
         ]
       )

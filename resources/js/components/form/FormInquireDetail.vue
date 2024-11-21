@@ -41,16 +41,17 @@
                 <div class="col px-3">
                     <div class="row mt-2 no-gutters">
 
+<!--                        {{pasajerosSeleccionadosForm}}-->
                         <template v-for="numeroPasajerosForm in travellers_form">
                             <numero-pasajeros-form v-bind:numeroPasajerosForm="numeroPasajerosForm" v-bind:pasajerosSeleccionadosForm="pasajerosSeleccionadosForm" v-on:checked="selectNumeroPasajerosForm"></numero-pasajeros-form>
                         </template>
 
 
-                        <div class="col-2">
-                            <div class="input-group input-group-sm">
-                                <input type="text" class="form-control font-weight-bold" placeholder="Especifica">
-                            </div>
-                        </div>
+<!--                        <div class="col-2">-->
+<!--                            <div class="input-group input-group-sm">-->
+<!--                                <input type="text" class="form-control font-weight-bold" placeholder="Especifica">-->
+<!--                            </div>-->
+<!--                        </div>-->
                     </div>
                 </div>
             </div>
@@ -75,11 +76,11 @@
                             <duracion-form v-bind:duracionForm="duracionForm" v-bind:duracionSeleccionadosForm="duracionSeleccionadosForm" v-on:checked="selectDuracionForm"></duracion-form>
                         </template>
 
-                        <div class="col-2">
-                            <div class="input-group input-group-sm">
-                                <input type="text" class="form-control font-weight-bold" placeholder="Especifica">
-                            </div>
-                        </div>
+<!--                        <div class="col-2">-->
+<!--                            <div class="input-group input-group-sm">-->
+<!--                                <input type="text" class="form-control font-weight-bold" placeholder="Especifica">-->
+<!--                            </div>-->
+<!--                        </div>-->
                     </div>
                 </div>
             </div>
@@ -251,7 +252,7 @@
                         nombre: 'Montaña 7 colores', value: '4'
                     },
                     {
-                        nombre: 'Lago Titicaca', value: '5'
+                        nombre: 'Lago Titicaca', value: '5+'
                     }
                 ],
                 durations_form:[
@@ -330,15 +331,20 @@
                 }
 
             },
-            selectNumeroPasajerosForm: function (pasajerosForm, checked) {
-                if (checked){
-                    this.pasajerosSeleccionadosForm.push(pasajerosForm);
-                    console.log(pasajerosForm);
-                }else{
-                    let index = this.pasajerosSeleccionadosForm.indexOf(pasajerosForm);
-                    this.$delete(this.pasajerosSeleccionadosForm, index);
-                    console.log(index);
-                }
+            // selectNumeroPasajerosForm: function (pasajerosForm, checked) {
+            //     if (checked){
+            //         this.pasajerosSeleccionadosForm.push(pasajerosForm);
+            //         console.log(pasajerosForm);
+            //     }else{
+            //         let index = this.pasajerosSeleccionadosForm.indexOf(pasajerosForm);
+            //         this.$delete(this.pasajerosSeleccionadosForm, index);
+            //         console.log(index);
+            //     }
+            // },
+            selectNumeroPasajerosForm: function (pasajerosForm) {
+                // Sobrescribe directamente con el valor del radio seleccionado
+                this.pasajerosSeleccionadosForm = pasajerosForm;
+                console.log(pasajerosForm);
             },
             selectDuracionForm: function (duracionForm, checked) {
                 if (checked){

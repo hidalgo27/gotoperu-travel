@@ -13,6 +13,7 @@
         "artesaos/seotools": "^0.20.2",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^7.3",
+        "jenssegers/agent": "^2.6",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
         "laravel/ui": "^1.0"
