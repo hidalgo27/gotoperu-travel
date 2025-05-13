@@ -3974,6 +3974,7 @@ __webpack_require__.r(__webpack_exports__);
       el_telefono: '',
       el_textarea: '',
       country: "",
+      country_code: "",
       pickerOptions: {
         disabledDate: function disabledDate(time) {
           return time.getTime() > Date.now();
@@ -4010,9 +4011,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     countryChanged: function countryChanged(country) {
+      this.country = country.name.replace(/\s*\(.*?\)\s*/g, '').trim();
+      this.country_code = "".concat(country.iso2.toUpperCase(), " +").concat(country.dialCode);
       console.log(country);
-      this.country = country.name + '(' + country.dialCode + ')';
-      console.log(this.country);
+      console.log("country code: " + this.country_code);
+      console.log("country: " + this.country);
     },
     selectDestino: function selectDestino(destinoForm, checked) {
       if (checked) {
@@ -4080,7 +4083,8 @@ __webpack_require__.r(__webpack_exports__);
         el_fecha: this.el_fecha,
         el_telefono: this.el_telefono,
         el_textarea: this.el_textarea,
-        country: this.country
+        country: this.country,
+        country_code: this.country_code
       };
       var self = this;
       this.loadingdesign = true;
@@ -4403,6 +4407,7 @@ __webpack_require__.r(__webpack_exports__);
       el_telefono: '',
       el_textarea: '',
       country: "",
+      country_code: "",
       pickerOptions: {
         disabledDate: function disabledDate(time) {
           return time.getTime() > Date.now();
@@ -4438,7 +4443,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     countryChanged: function countryChanged(country) {
-      this.country = country.name + '(' + country.dialCode + ')';
+      this.country = country.name.replace(/\s*\(.*?\)\s*/g, '').trim();
+      this.country_code = "".concat(country.iso2.toUpperCase(), " +").concat(country.dialCode);
+      console.log(country);
+      console.log("country code: " + this.country_code);
+      console.log("country: " + this.country);
     },
     selectCategoryForm: function selectCategoryForm(categoriaForm, checked) {
       if (checked) {
@@ -4495,7 +4504,8 @@ __webpack_require__.r(__webpack_exports__);
         el_fecha: this.el_fecha,
         el_telefono: this.el_telefono,
         el_textarea: this.el_textarea,
-        country: this.country
+        country: this.country,
+        country_code: this.country_code
       };
       var self = this;
       this.loadingdesign = true;
