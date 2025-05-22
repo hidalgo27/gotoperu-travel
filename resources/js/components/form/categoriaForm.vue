@@ -15,7 +15,7 @@
         methods: {
             onchangeCategoryForm: function (ev) {
                 // console.log(ev);
-                this.$emit('checked', this.categoriaForm.nombre, ev.target.checked)
+                this.$emit('checked', this.categoriaForm.estrellas, ev.target.checked)
             }
         },
     }

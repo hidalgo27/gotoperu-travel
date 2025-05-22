@@ -4497,7 +4497,7 @@ __webpack_require__.r(__webpack_exports__);
         paquete_id: this.paquetesId,
         category_d: this.categoriasSeleccionadosForm,
         pasajeros_d: this.pasajerosSeleccionadosForm,
-        duracion_d: this.duracionSeleccionadosForm,
+        // duracion_d: this.duracionSeleccionadosForm,
         tap_form_show: this.tap_form_show,
         el_nombre: this.el_nombre,
         el_email: this.el_email,
@@ -4528,8 +4528,8 @@ __webpack_require__.r(__webpack_exports__);
       // this.$forceUpdate();
       this.formshow = true;
       this.categoriasSeleccionadosForm = [];
-      this.pasajerosSeleccionadosForm = [];
-      this.duracionSeleccionadosForm = [];
+      this.pasajerosSeleccionadosForm = []; // this.duracionSeleccionadosForm = [];
+
       this.el_nombre = '';
       this.el_email = '';
       this.el_fecha = '';
@@ -4567,7 +4567,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     onchangeCategoryForm: function onchangeCategoryForm(ev) {
       // console.log(ev);
-      this.$emit('checked', this.categoriaForm.nombre, ev.target.checked);
+      this.$emit('checked', this.categoriaForm.estrellas, ev.target.checked);
     }
   }
 });
@@ -101764,38 +101764,6 @@ var render = function() {
                         )
                       ])
                     ]
-                  ),
-                  _vm._v(" "),
-                  _vm._m(4),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "row align-items-center no-gutters border" },
-                    [
-                      _vm._m(5),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col px-3" }, [
-                        _c(
-                          "div",
-                          { staticClass: "row mt-2 no-gutters" },
-                          [
-                            _vm._l(_vm.durations_form, function(duracionForm) {
-                              return [
-                                _c("duracion-form", {
-                                  attrs: {
-                                    duracionForm: duracionForm,
-                                    duracionSeleccionadosForm:
-                                      _vm.duracionSeleccionadosForm
-                                  },
-                                  on: { checked: _vm.selectDuracionForm }
-                                })
-                              ]
-                            })
-                          ],
-                          2
-                        )
-                      ])
-                    ]
                   )
                 ]
               ),
@@ -102113,14 +102081,14 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _vm._m(6),
+      _vm._m(4),
       _vm._v(" "),
       !_vm.formshow
         ? _c("div", { staticClass: "row mt-4" }, [
             _c("div", { staticClass: "col" }, [
               _c("div", { staticClass: "alert alert-success" }, [
                 _c("div", { staticClass: "row align-items-center" }, [
-                  _vm._m(7),
+                  _vm._m(5),
                   _vm._v(" "),
                   _c("div", { staticClass: "col text-center" }, [
                     _c("h4", { staticClass: "font-weight-bold" }, [
@@ -102153,7 +102121,7 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(8)
+                  _vm._m(6)
                 ])
               ])
             ])
@@ -102217,32 +102185,6 @@ var staticRenderFns = [
       [
         _c("div", { staticClass: "py-4 text-white" }, [
           _c("i", { staticClass: "fas fa-users" })
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mt-4" }, [
-      _c("div", { staticClass: "col text-center" }, [
-        _c("h5", { staticClass: "font-weight-bold" }, [
-          _vm._v("DURACIÓN DE VIAJE")
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "col-2 text-center rounded-left bg-secondary" },
-      [
-        _c("div", { staticClass: "py-4 text-white" }, [
-          _c("i", { staticClass: "far fa-clock" })
         ])
       ]
     )
