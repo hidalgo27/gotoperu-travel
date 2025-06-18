@@ -67,7 +67,7 @@
                                         <a href=""> <img src="{{asset('images/icons/pe.svg')}}" alt="" width="40" class="w-" loading="lazy"> </a>
                                     </div>
                                     <div class="social-info">
-                                        <a href="tel:51922300244">+51 922 300 244</a>
+                                        <a href="tel:51933358040">+51 933 358 040</a>
                                     </div>
                                 </li>
                             </ul>
@@ -99,7 +99,7 @@
             <div class="row justify-content-end">
                 <div class="col-auto">
                     <div class="bg-dark rounded px-3 mx-3 shadow clearfix float-right">
-                        <a href="https://api.whatsapp.com/send?phone=51922300244" target="_blank" class="font-weight-bold text-white stretched-link">
+                        <a href="https://api.whatsapp.com/send?phone=51933358040" target="_blank" class="font-weight-bold text-white stretched-link">
                             Escríbenos por WhatsApp
                             <img src="{{asset('images/icons/whatsapp-i.png')}}" class="py-1" alt="logo whatsapp" width="50" data-toggle="tooltip" data-placement="top" title="Perú" loading="lazy">
                         </a>
