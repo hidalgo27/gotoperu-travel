@@ -335,7 +335,7 @@ class HomepageController extends Controller
 
         try {
             $travelDay = Carbon::parse($request->el_fecha);
-            $formattedDate = $travelDay->format('Y-m-d H:i:s');
+            $formattedDate = $travelDay->format('Y-m-d');
             $inquireDate = Carbon::now('America/Lima')->format('Y-m-d H:i:s');
         } catch (\Exception $e) {
             return response()->json(['error' => 'Fecha inválida.'], 400);
@@ -541,7 +541,7 @@ class HomepageController extends Controller
 
         // Formatear la fecha a ISO 8601 ("Y-m-d\TH:i:s.v\Z"), que es el formato deseado
 //        $formattedDate = $travelDay->format('Y-m-d\TH:i:s.v\Z');
-        $formattedDate = $travelDay->format('Y-m-d H:i:s');
+        $formattedDate = $travelDay->format('Y-m-d');
 
         $inquireDate = Carbon::now('America/Lima')->format('Y-m-d H:i:s');
 
